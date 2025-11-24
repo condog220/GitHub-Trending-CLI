@@ -1,16 +1,11 @@
+/*
+Copyright © 2025 NAME HERE <EMAIL ADDRESS>
+
+*/
 package main
 
-import (
-	"fmt"
-)
+import "condog220/GitHub-Trending/cmd"
 
 func main() {
-	fmt.Println("GitHub Trending CLI")
-	fmt.Print("Enter programming language: ")
-	var language string
-	fmt.Scanln(&language)
-	fmt.Print("Enter number of repositories to fetch: ")
-	var amount int
-	fmt.Scanln(&amount)
-	loadRepos(language, amount)
+	cmd.Execute()
 }
