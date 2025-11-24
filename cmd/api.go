@@ -42,9 +42,13 @@ func loadRepos(language string, amount int) {
 		return
 	}
 
-	for _, repo := range repos {
-		fmt.Printf("Repository:\n Name: %s\n Description: %s\n Stars: %d\n Language: %s\n URL: %s\n\n",
-			repo.Name, repo.Description, repo.StarCount, repo.Language, repo.HTMLURL)
+	if len(repos) > amount {
+		repos = repos[:amount]
+	}
+
+	for index, repo := range repos {
+		fmt.Printf("🐷 Repository: %d \n📘 Name: %s\n📝 Description: %s\n⭐ Stars: %d\n💬 Language: %s\n🔗 URL: %s\n\n",
+			index+1, repo.Name, repo.Description, repo.StarCount, repo.Language, repo.HTMLURL)
 	}
 
 }
