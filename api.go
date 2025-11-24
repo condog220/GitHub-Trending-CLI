@@ -15,7 +15,7 @@ func loadRepos(language string, amount int) {
 		fmt.Println("Error loading .env file")
 	}
 	apiKey := os.Getenv("API_KEY")
-	baseUrl := fmt.Sprintf("https://api.github.com/search/repositories?q=%s&sort=stars&order=desc&per_page=%d", language, amount)
+	baseUrl := fmt.Sprintf("https://api.github.com/search/repositories?q=language:%s&sort=stars&order=desc&per_page=%d", language, amount)
 
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", baseUrl, nil)
@@ -36,9 +36,15 @@ func loadRepos(language string, amount int) {
 		fmt.Println("Error reading response body:", err)
 	}
 
-	repos, err = parseJson(data)
+	repos, err := parseJson(data)
 	if err != nil {
 		fmt.Println("Error parsing JSON:", err)
+		return
+	}
+
+	for _, repo := range repos {
+		fmt.Printf("Repository:\n Name: %s\n Description: %s\n Stars: %d\n Language: %s\n URL: %s\n\n",
+			repo.Name, repo.Description, repo.StarCount, repo.Language, repo.HTMLURL)
 	}
 
 }
